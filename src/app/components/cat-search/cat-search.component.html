@@ -1,0 +1,59 @@
+<div class="search-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Cat Breed Search</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Search breeds</mat-label>
+          <input matInput formControlName="query" placeholder="Enter breed name">
+          <mat-error *ngIf="searchForm.get('query')?.invalid">Search term is required</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" 
+                [disabled]="!searchForm.valid || loading">
+          <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          <span *ngIf="!loading">Search</span>
+        </button>
+      </form>
+
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let breed">{{ breed.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="origin">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Origin</mat-header-cell>
+          <mat-cell *matCellDef="let breed">{{ breed.origin }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="temperament">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Temperament</mat-header-cell>
+          <mat-cell *matCellDef="let breed">{{ breed.temperament }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="life_span">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Lifespan</mat-header-cell>
+          <mat-cell *matCellDef="let breed">{{ breed.life_span }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                     showFirstLastButtons
+                     aria-label="Select page of cat breeds">
+      </mat-paginator>
+
+      <div class="no-results" *ngIf="!loading && dataSource.data.length === 0">
+        No results found
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

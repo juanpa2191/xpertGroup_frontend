@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Cat Breeds</h2>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Select Breed</mat-label>
+    <mat-select (selectionChange)="selectBreed($event.value)" placeholder="Select a breed">
+      <mat-option *ngFor="let breed of breeds" [value]="breed">
+        {{ breed.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="selectedBreed">
+    <h3>{{ selectedBreed.name }}</h3>
+    
+    <div class="breed-info">
+      <div class="description">
+        <p>{{ selectedBreed.description }}</p>
+        <div class="stats">
+          <div class="stat-item">
+            <span>Origin:</span>
+            <span>{{ selectedBreed.origin }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Temperament:</span>
+            <span>{{ selectedBreed.temperament }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Lifespan:</span>
+            <span>{{ selectedBreed.life_span }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-carousel">
+        <mat-card *ngFor="let image of images">
+          <img mat-card-image [src]="image.url" alt="{{ selectedBreed.name }}">
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

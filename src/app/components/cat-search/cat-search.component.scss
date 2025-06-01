@@ -1,0 +1,33 @@
+.search-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+mat-card {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button {
+  width: 100%;
+}
+
+mat-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
+
+mat-spinner {
+  margin-right: 10px;
+}
